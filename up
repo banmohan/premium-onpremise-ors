@@ -22,4 +22,6 @@ else
     fi
 fi
 
+mkdir -p ./docker/data/
+cp -f $output_file ./docker/data/osm_file.pbf
 docker compose up -d
