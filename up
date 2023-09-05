@@ -14,7 +14,7 @@ output_file="map.osm.pbf"
 if [ -e "$output_file" ]; then
     echo "Map already exists. Skipping download."
 else
-    if wget "$pbf_url"; then
+    if wget "$pbf_url" --output-file=$output_file; then
         echo "Map successfully downloaded."
     else
         echo "Map Download failed. Exiting."
