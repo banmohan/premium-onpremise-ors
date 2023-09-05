@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script should run as the root user (sudo)."
+    echo "Use sudo or run as root user."
+    exit 1
+fi
+
+docker compose down -v --rmi all --remove-orphans
+rm -f docker-compose.yml*
+
+wget https://raw.githubusercontent.com/GIScience/openrouteservice/master/docker-compose.yml
+sed -i 's/8080:/9980:/g' docker-compose.yml
+sed -i 's/9001:/9901:/g' docker-compose.yml
+sed -i 's/BUILD_GRAPHS=False/BUILD_GRAPHS=True/g' docker-compose.yml
+sed -i 's|#    build:|    build:|g' docker-compose.yml
+sed -i 's|#      context: ./|      context: ./|g' docker-compose.yml
+sed -i 's|#      args:|      args:|g' docker-compose.yml
+sed -i 's|#        OSM_FILE: ./ors-api/src/test/files/heidelberg.osm.gz|        OSM_FILE: ./ors-api/src/files/map.osm.pbf|g' docker-compose.yml

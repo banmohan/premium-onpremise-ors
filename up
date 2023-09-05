@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script should run as the root user (sudo)."
+    echo "Use sudo or run as root user."
+    exit 1
+fi
+
+./down
+
+pbf_url="https://download.geofabrik.de/asia/nepal-latest.osm.pbf"
+output_file="map.osm.pbf"
+
+if [ -e "$output_file" ]; then
+    echo "Map already exists. Skipping download."
+else
+    if wget "$file_url"; then
+        echo "Map successfully downloaded."
+    else
+        echo "Map Download failed. Exiting."
+        exit 1
+    fi
+fi
+
+docker compose up -d
