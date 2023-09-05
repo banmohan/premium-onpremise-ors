@@ -16,4 +16,4 @@ sed -i 's/BUILD_GRAPHS=False/BUILD_GRAPHS=True/g' docker-compose.yml
 sed -i 's|#    build:|    build:|g' docker-compose.yml
 sed -i 's|#      context: ./|      context: ./|g' docker-compose.yml
 sed -i 's|#      args:|      args:|g' docker-compose.yml
-sed -i 's|#        OSM_FILE: ./ors-api/src/test/files/heidelberg.osm.gz|        OSM_FILE: ./ors-api/src/files/map.osm.pbf|g' docker-compose.yml
+sed -i 's|#        OSM_FILE: ./ors-api/src/test/files/heidelberg.osm.gz|        OSM_FILE: ./map.osm.pbf|g' docker-compose.yml
