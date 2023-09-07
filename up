@@ -29,6 +29,10 @@ sed "s/server.name.com/$SERVER_URL/g" premium-onpremise-ors > premium-onpremise-
 cp premium-onpremise-ors-new /etc/nginx/sites-available/premium-onpremise-ors
 ln -s /etc/nginx/sites-available/premium-onpremise-ors /etc/nginx/sites-enabled/premium-onpremise-ors
 rm premium-onpremise-ors-new
+sed "s/server.name.com/$SERVER_URL/g" premium-onpremise-map > premium-onpremise-map-new
+cp premium-onpremise-map-new /etc/nginx/sites-available/premium-onpremise-map
+ln -s /etc/nginx/sites-available/premium-onpremise-map /etc/nginx/sites-enabled/premium-onpremise-map
+rm premium-onpremise-map-new
 systemctl restart nginx
 
 wget https://raw.githubusercontent.com/GIScience/openrouteservice/master/docker-compose.yml
