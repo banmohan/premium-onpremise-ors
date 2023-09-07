@@ -26,8 +26,7 @@ sed -i "s|#        OSM_FILE: ./ors-api/src/test/files/heidelberg.osm.gz|        
 
 rm -rf ors-map-client
 git clone https://github.com/GIScience/ors-map-client.git
-cd ors-map-client
-cd client/src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+cd ors-map-client/src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
 cd config
 sed -i "s|$ORS_API_KEY|put-here-an-ors-api-key|g" app-config.js
 sed -i "s|$BITLY_API_KEY|put-the-bitly-api-key-here|g" app-config.js
