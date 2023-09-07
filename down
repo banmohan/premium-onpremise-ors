@@ -2,19 +2,20 @@
 
 CWD=$(pwd)
 
-ORS_API_KEY=no-need-for-local-run
-BITLY_API_KEY=bitlyApiKey
-BITLY_LOGIN=bitlyLogin
-
 if [[ $EUID -ne 0 ]]; then
     echo "This script should run as the root user (sudo)."
     echo "Use sudo or run as root user."
     exit 1
 fi
 
+rm -f /etc/nginx/sites-enabled/premium-onpremise-ors
+rm -f /etc/nginx/sites-available/premium-onpremise-ors
+
 docker compose down -v --rmi all --remove-orphans
+
 mkdir -p ors-map-client
 cd ors-map-client
 docker compose down -v --rmi all --remove-orphans
+
 cd ..
 rm -rf ors-map-client
