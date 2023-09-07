@@ -11,9 +11,33 @@ fi
 ./down
 cd $CWD
 
+rm -f docker-compose.yml*
+wget https://raw.githubusercontent.com/GIScience/openrouteservice/master/docker-compose.yml
+sed -i "s/8080:/9980:/g" docker-compose.yml
+sed -i "s/9001:/9901:/g" docker-compose.yml
+sed -i "s/BUILD_GRAPHS=False/BUILD_GRAPHS=True/g" docker-compose.yml
+sed -i "s|#    build:|    build:|g" docker-compose.yml
+sed -i "s|#      context: ./|      context: ./|g" docker-compose.yml
+sed -i "s|#      args:|      args:|g" docker-compose.yml
+sed -i "s|#        OSM_FILE: ./ors-api/src/test/files/heidelberg.osm.gz|        OSM_FILE: ./map.osm.pbf|g" docker-compose.yml
+
+git clone https://github.com/GIScience/ors-map-client.git
+cd ors-map-client/src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
+cd $CWD/ors-map-client/src/config
+sed -i "s|put-here-an-ors-api-key|$ORS_API_KEY|g" app-config.js
+sed -i "s|put-the-bitly-api-key-here|$BITLY_API_KEY|g" app-config.js
+sed -i "s|put-the-bitly-login-here|$BITLY_LOGIN|g" app-config.js
+sed -i "s|useORSMenu: true|useORSMenu: false|g" app-config.js
+sed -i "s|appName: 'Openrouteservice Maps'|appName: 'Premium Maps'|g" app-config.js
+sed -i "s|footerAppName: 'openrouteservice'|footerAppName: 'Premium'|g" app-config.js
+sed -i "s|footerDevelopedByLink: 'https://www.heigit.org/'|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|g" app-config.js
+sed -i "s|https://api.openrouteservice.org|http://localhost:9980|g" app-config.js
+cd $CWD/ors-map-client
+sed -i "s|8080:|9981:|g" docker-compose.yml
+cd $CWD
+
 pbf_url="https://download.geofabrik.de/asia/nepal-latest.osm.pbf"
 output_file="map.osm.pbf"
-
 if [ -e "$output_file" ]; then
     echo "Map already exists. Skipping download."
 else
