@@ -25,3 +25,5 @@ fi
 mkdir -p ./docker/data/
 cp -f $output_file ./docker/data/osm_file.pbf
 docker compose up -d
+cd ors-map-client
+docker-compose up -d
