@@ -31,7 +31,6 @@ ln -s /etc/nginx/sites-available/premium-onpremise-ors /etc/nginx/sites-enabled/
 rm premium-onpremise-ors-new
 systemctl restart nginx
 
-rm -f docker-compose.yml*
 wget https://raw.githubusercontent.com/GIScience/openrouteservice/master/docker-compose.yml
 sed -i "s/8080:/9980:/g" docker-compose.yml
 sed -i "s/9001:/9901:/g" docker-compose.yml

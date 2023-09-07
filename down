@@ -19,3 +19,4 @@ docker compose down -v --rmi all --remove-orphans
 
 cd ..
 rm -rf ors-map-client
+rm -f docker-compose.yml*
