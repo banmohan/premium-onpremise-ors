@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CWD=$(pwd)
+
 ORS_API_KEY=no-need-for-local-run
 BITLY_API_KEY=bitlyApiKey
 BITLY_LOGIN=bitlyLogin
@@ -11,6 +13,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 docker compose down -v --rmi all --remove-orphans
+mkdir -p ors-map-client
 cd ors-map-client
 docker compose down -v --rmi all --remove-orphans
 
@@ -27,7 +30,7 @@ sed -i "s|#        OSM_FILE: ./ors-api/src/test/files/heidelberg.osm.gz|        
 rm -rf ors-map-client
 git clone https://github.com/GIScience/ors-map-client.git
 cd ors-map-client/src && cp config-examples/* config && for i in config/*-example.js; do mv -- "$i" "${i%-example.js}.js"; done
-cd config
+cd $CWD/ors-map-client/src/config
 sed -i "s|$ORS_API_KEY|put-here-an-ors-api-key|g" app-config.js
 sed -i "s|$BITLY_API_KEY|put-the-bitly-api-key-here|g" app-config.js
 sed -i "s|$BITLY_LOGIN|put-the-bitly-login-here|g" app-config.js
@@ -36,6 +39,6 @@ sed -i "s|appName: 'Premium Maps'|appName: 'Openrouteservice Maps'|g" app-config
 sed -i "s|footerAppName: 'Premium'|footerAppName: 'openrouteservice'|g" app-config.js
 sed -i "s|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|footerDevelopedByLink: 'https://www.heigit.org/'|g" app-config.js
 sed -i "s|http://localhost:9980|https://api.openrouteservice.org|g" app-config.js
-echo $(pwd)
-cd ../..
+cd $CWD/ors-map-client
 sed -i "s|9981:|8080:|g" docker-compose.yml
+cd $CWD

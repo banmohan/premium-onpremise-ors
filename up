@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CWD=$(pwd)
+
 if [[ $EUID -ne 0 ]]; then
     echo "This script should run as the root user (sudo)."
     echo "Use sudo or run as root user."
@@ -7,6 +9,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 ./down
+cd $CWD
 
 pbf_url="https://download.geofabrik.de/asia/nepal-latest.osm.pbf"
 output_file="map.osm.pbf"
