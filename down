@@ -36,5 +36,6 @@ sed -i "s|appName: 'Premium Maps'|appName: 'Openrouteservice Maps'|g" app-config
 sed -i "s|footerAppName: 'Premium'|footerAppName: 'openrouteservice'|g" app-config.js
 sed -i "s|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|footerDevelopedByLink: 'https://www.heigit.org/'|g" app-config.js
 sed -i "s|http://localhost:9980|https://api.openrouteservice.org|g" app-config.js
+echo $(pwd)
 cd ../..
 sed -i "s|9981:|8080:|g" docker-compose.yml
