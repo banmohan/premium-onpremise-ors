@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script should run as the root user (sudo)."
+    echo "Use sudo or run as root user."
+    exit 1
+fi
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <server_url>"
+  exit 1
+fi
+
+server_url="$1"
+
+if [[ ! "$server_url" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+  echo "Invalid server URL format: $server_url"
+  exit 1
+fi
+
+sed "s/server.name.com/$server_url/g" premium-onpremise-ors > premium-onpremise-ors-new
+
+rm -f /etc/nginx/sites-enabled/premium-onpremise-ors
+rm -f /etc/nginx/sites-available/premium-onpremise-ors
+cp premium-onpremise-ors-new /etc/nginx/sites-available/premium-onpremise-ors
+ln -s /etc/nginx/sites-available/premium-onpremise-ors /etc/nginx/sites-enabled/premium-onpremise-ors
+rm premium-onpremise-ors-new
+
+systemctl restart nginx
