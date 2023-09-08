@@ -2,7 +2,7 @@
 
 CWD=$(pwd)
 
-ORS_API_KEY=no-need-for-local-run
+ORS_API_KEY=5b3ce3597851110001cf624876988c902c9e4fc6a3432c41361a443e
 BITLY_API_KEY=bitlyApiKey
 BITLY_LOGIN=bitlyLogin
 
@@ -54,7 +54,7 @@ sed -i "s|useORSMenu: true|useORSMenu: false|g" app-config.js
 sed -i "s|appName: 'Openrouteservice Maps'|appName: 'Premium Maps'|g" app-config.js
 sed -i "s|footerAppName: 'openrouteservice'|footerAppName: 'Premium'|g" app-config.js
 sed -i "s|footerDevelopedByLink: 'https://www.heigit.org/'|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|g" app-config.js
-sed -i "s|https://api.openrouteservice.org|http://ors.$SERVER_URL/v2|g" default-map-settings.js
+#sed -i "s|https://api.openrouteservice.org|http://ors.$SERVER_URL/v2|g" default-map-settings.js
 cd $CWD/ors-map-client
 sed -i "s|8080:|9981:|g" docker-compose.yml
 cd $CWD
