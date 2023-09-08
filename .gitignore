@@ -2,3 +2,4 @@ docker-compose.yml
 map.osm.pbf
 ors-map-client/
 docker/
+pelias/

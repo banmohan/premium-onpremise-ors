@@ -23,3 +23,10 @@ docker compose down -v --rmi all --remove-orphans
 cd ..
 rm -rf ors-map-client
 rm -f docker-compose.yml*
+
+mldir -p pelias/projects/nepal
+cd pelias/projects/nepal
+docker compose down -v --rmi all --remove-orphans
+cd $CWD
+rm -rf pelias
+rm /usr/local/bin/pelias
