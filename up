@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 CWD=$(pwd)
 
@@ -72,7 +73,6 @@ else
     fi
 fi
 
-set -x
 git clone https://github.com/pelias/docker.git pelias && cd pelias
 sudo ln -s pelias /usr/local/bin/pelias
 cp $CWD/pelias-nepal $CWD/pelias/projects/nepal -R
@@ -80,14 +80,15 @@ cd projects/nepal
 mkdir ./data
 sed -i '/DATA_DIR/d' .env
 echo 'DATA_DIR=./data' >> .env
-pelias compose pull
-pelias elastic start
-pelias elastic wait
-pelias elastic create
-pelias download all
-pelias prepare all
-pelias import all
-pelias compose up
+cd $CWD/pelias
+./pelias compose pull
+./pelias elastic start
+./pelias elastic wait
+./pelias elastic create
+./pelias download all
+./pelias prepare all
+./pelias import all
+./pelias compose up
 cd $CWD
 
 mkdir -p ./docker/data/
