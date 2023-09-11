@@ -1,4 +1,5 @@
 docker-compose.yml
+!pelias-nepal/docker-compose.yml
 map.osm.pbf
 ors-map-client/
 docker/
