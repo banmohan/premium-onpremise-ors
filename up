@@ -75,7 +75,7 @@ fi
 
 git clone https://github.com/pelias/docker.git pelias && cd pelias
 chmod 777 pelias
-sudo ln -s pelias /usr/local/bin/pelias
+sudo ln -s "$(pwd)/pelias" /usr/local/bin/pelias
 cp $CWD/pelias-nepal $CWD/pelias/projects/nepal -R
 cd projects/nepal
 mkdir ./data
