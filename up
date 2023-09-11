@@ -7,9 +7,10 @@ ORS_API_KEY=5b3ce3597851110001cf624876988c902c9e4fc6a3432c41361a443e
 BITLY_API_KEY=bitlyApiKey
 BITLY_LOGIN=bitlyLogin
 
-if [[ $EUID -ne 0 ]]; then
-    echo "This script should run as the root user (sudo)."
-    echo "Use sudo or run as root user."
+if [[ $EUID -eq 0 ]]; then
+    echo "This script should not run as the root user (sudo)."
+    echo "Do not use sudo or run as root user."
+    echo "If root privilege is needed, script will ask accordingly."
     exit 1
 fi
 
@@ -27,14 +28,14 @@ fi
 cd $CWD
 
 sed "s/server.name.com/$SERVER_URL/g" premium-onpremise-ors > premium-onpremise-ors-new
-cp premium-onpremise-ors-new /etc/nginx/sites-available/premium-onpremise-ors
-ln -s /etc/nginx/sites-available/premium-onpremise-ors /etc/nginx/sites-enabled/premium-onpremise-ors
+sudo cp premium-onpremise-ors-new /etc/nginx/sites-available/premium-onpremise-ors
+sudo ln -s /etc/nginx/sites-available/premium-onpremise-ors /etc/nginx/sites-enabled/premium-onpremise-ors
 rm premium-onpremise-ors-new
 sed "s/server.name.com/$SERVER_URL/g" premium-onpremise-map > premium-onpremise-map-new
-cp premium-onpremise-map-new /etc/nginx/sites-available/premium-onpremise-map
-ln -s /etc/nginx/sites-available/premium-onpremise-map /etc/nginx/sites-enabled/premium-onpremise-map
+sudo cp premium-onpremise-map-new /etc/nginx/sites-available/premium-onpremise-map
+sudo ln -s /etc/nginx/sites-available/premium-onpremise-map /etc/nginx/sites-enabled/premium-onpremise-map
 rm premium-onpremise-map-new
-systemctl restart nginx
+sudo systemctl restart nginx
 
 wget https://raw.githubusercontent.com/GIScience/openrouteservice/master/docker-compose.yml
 sed -i "s/8080:/9980:/g" docker-compose.yml
@@ -81,15 +82,14 @@ cd projects/nepal
 mkdir ./data
 sed -i '/DATA_DIR/d' .env
 echo 'DATA_DIR=./data' >> .env
-sudo -u "$current_user"
-sudo -u nobody /usr/local/bin/pelias compose pull
-sudo -u nobody /usr/local/bin/pelias elastic start
-sudo -u nobody /usr/local/bin/pelias elastic wait
-sudo -u nobody /usr/local/bin/pelias elastic create
-sudo -u nobody /usr/local/bin/pelias download all
-sudo -u nobody /usr/local/bin/pelias prepare all
-sudo -u nobody /usr/local/bin/pelias import all
-sudo -u nobody /usr/local/bin/pelias compose up
+/usr/local/bin/pelias compose pull
+/usr/local/bin/pelias elastic start
+/usr/local/bin/pelias elastic wait
+/usr/local/bin/pelias elastic create
+/usr/local/bin/pelias download all
+/usr/local/bin/pelias prepare all
+/usr/local/bin/pelias import all
+/usr/local/bin/pelias compose up
 cd $CWD
 
 mkdir -p ./docker/data/

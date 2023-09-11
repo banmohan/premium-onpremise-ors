@@ -3,17 +3,18 @@ set -x
 
 CWD=$(pwd)
 
-if [[ $EUID -ne 0 ]]; then
-    echo "This script should run as the root user (sudo)."
-    echo "Use sudo or run as root user."
+if [[ $EUID -eq 0 ]]; then
+    echo "This script should not run as the root user (sudo)."
+    echo "Do not use sudo or run as root user."
+    echo "If root privilege is needed, script will ask accordingly."
     exit 1
 fi
 
-rm -f /etc/nginx/sites-enabled/premium-onpremise-ors
-rm -f /etc/nginx/sites-available/premium-onpremise-ors
-rm -f /etc/nginx/sites-enabled/premium-onpremise-map
-rm -f /etc/nginx/sites-available/premium-onpremise-map
-systemctl restart nginx
+sudo rm -f /etc/nginx/sites-enabled/premium-onpremise-ors
+sudo rm -f /etc/nginx/sites-available/premium-onpremise-ors
+sudo rm -f /etc/nginx/sites-enabled/premium-onpremise-map
+sudo rm -f /etc/nginx/sites-available/premium-onpremise-map
+sudo systemctl restart nginx
 
 docker compose down -v --rmi all --remove-orphans
 
@@ -27,8 +28,8 @@ rm -f docker-compose.yml*
 
 mkdir -p pelias/projects/nepal
 cd pelias/projects/nepal
-sudo -u nobody pelias compose down
+/usr/local/bin/pelias compose down
 docker compose down -v --rmi all --remove-orphans
 cd $CWD
 rm -rf pelias
-rm /usr/local/bin/pelias
+sudo rm -f /usr/local/bin/pelias
