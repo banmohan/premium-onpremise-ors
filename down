@@ -23,7 +23,7 @@ cd ors-map-client
 docker compose down -v --rmi all --remove-orphans
 
 cd ..
-rm -rf ors-map-client
+sudo rm -rf ors-map-client
 rm -f docker-compose.yml*
 
 mkdir -p pelias/projects/nepal
