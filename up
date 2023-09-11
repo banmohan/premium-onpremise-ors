@@ -74,21 +74,22 @@ else
 fi
 
 git clone https://github.com/pelias/docker.git pelias && cd pelias
-sudo ln -s pelias /bin/pelias
+chmod 777 pelias
+sudo ln -s pelias /usr/local/bin/pelias
 cp $CWD/pelias-nepal $CWD/pelias/projects/nepal -R
 cd projects/nepal
 mkdir ./data
 sed -i '/DATA_DIR/d' .env
 echo 'DATA_DIR=./data' >> .env
 sudo -u "$current_user"
-sudo -u nobody pelias compose pull
-sudo -u nobody pelias elastic start
-sudo -u nobody pelias elastic wait
-sudo -u nobody pelias elastic create
-sudo -u nobody pelias download all
-sudo -u nobody pelias prepare all
-sudo -u nobody pelias import all
-sudo -u nobody pelias compose up
+sudo -u nobody /usr/local/bin/pelias compose pull
+sudo -u nobody /usr/local/bin/pelias elastic start
+sudo -u nobody /usr/local/bin/pelias elastic wait
+sudo -u nobody /usr/local/bin/pelias elastic create
+sudo -u nobody /usr/local/bin/pelias download all
+sudo -u nobody /usr/local/bin/pelias prepare all
+sudo -u nobody /usr/local/bin/pelias import all
+sudo -u nobody /usr/local/bin/pelias compose up
 cd $CWD
 
 mkdir -p ./docker/data/

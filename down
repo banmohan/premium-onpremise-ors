@@ -31,4 +31,4 @@ sudo -u nobody pelias compose down
 docker compose down -v --rmi all --remove-orphans
 cd $CWD
 rm -rf pelias
-rm /bin/pelias
+rm /usr/local/bin/pelias
