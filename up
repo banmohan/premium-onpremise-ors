@@ -102,6 +102,12 @@ mkdir -p ./docker/data/
 cp -f $output_file ./docker/data/osm_file.pbf
 docker compose up -d
 cd docker/conf
+polling_interval=1
+while [ ! -f "ors-config.json" ]; do
+    echo "Waiting for ors-config.json to become available..."
+    sleep $polling_interval
+done
+echo "ors-config.json is now available."
 sudo sed -i 's/"maximum_distance": 100000,/"maximum_distance": 50000000,/g' ors-config.json
 sudo sed -i 's/"maximum_distance_dynamic_weights": 100000,/"maximum_distance": 50000000,/g' ors-config.json
 sudo sed -i 's/"maximum_distance_avoid_areas": 100000,/"maximum_distance": 50000000,/g' ors-config.json
