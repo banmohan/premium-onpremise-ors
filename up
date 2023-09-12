@@ -109,7 +109,7 @@ sudo sed -i 's/"maximum_distance_alternative_routes": 100000,/"maximum_distance"
 sudo sed -i 's/"maximum_distance_round_trip_routes": 100000,/"maximum_distance": 50000000,/g' ors-config.json
 cd $CWD
 docker compose down -v --rmi all --remove-orphans
-docker compose up -d --build
+docker compose up -d
 
 cd ors-map-client
 docker compose up -d
