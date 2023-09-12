@@ -62,7 +62,7 @@ sed -i "s|mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Hei
 cd $CWD/ors-map-client/src/support
 sed -i "s|addressesArgs.layers = \['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode'\]|addressesArgs.layers = \['coarse', 'venue', 'address', 'street', 'locality', 'county', 'localadmin', 'region', 'country', 'neighbourhood'\]|g" ors-api-runner.js
 cd $CWD/ors-map-client/src/fragments/map-view
-sed -i "s/return this.mapHeight > 450/return true && this.mapHeight > 450/g" map-view.js
+sed -i "s|return this.mapHeight > 450|return true \&\& this.mapHeight > 450|g" map-view.js
 cd $CWD/ors-map-client
 sed -i "s|8080:|9981:|g" docker-compose.yml
 cd $CWD
@@ -108,7 +108,7 @@ sudo sed -i 's/"maximum_distance_avoid_areas": 100000,/"maximum_distance": 50000
 sudo sed -i 's/"maximum_distance_alternative_routes": 100000,/"maximum_distance": 50000000,/g' ors-config.json
 sudo sed -i 's/"maximum_distance_round_trip_routes": 100000,/"maximum_distance": 50000000,/g' ors-config.json
 cd $CWD
-docker compose down
+docker compose down -v --rmi all --remove-orphans
 docker compose up -d --build
 
 cd ors-map-client
