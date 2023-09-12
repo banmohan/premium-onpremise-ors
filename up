@@ -80,6 +80,11 @@ else
     fi
 fi
 
+mkdir -p ./docker/data/
+mkdir -p ./docker/conf/
+cp -f $output_file ./docker/data/osm_file.pbf
+cp -f ors-config.json ./docker/conf/ors-config.json
+
 git clone https://github.com/pelias/docker.git pelias && cd pelias
 chmod 777 pelias
 sudo ln -s "$(pwd)/pelias" /usr/local/bin/pelias
@@ -98,12 +103,7 @@ echo 'DATA_DIR=./data' >> .env
 /usr/local/bin/pelias compose up
 cd $CWD
 
-mkdir -p ./docker/data/
-mkdir -p ./docker/conf/
-cp -f $output_file ./docker/data/osm_file.pbf
-cp -f ors-config.json ./docker/conf/ors-config.json
 docker compose up -d
-cd $CWD
 
 cd ors-map-client
 docker compose up -d
