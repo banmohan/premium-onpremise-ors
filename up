@@ -101,5 +101,15 @@ cd $CWD
 mkdir -p ./docker/data/
 cp -f $output_file ./docker/data/osm_file.pbf
 docker compose up -d
+cd docker/conf
+sudo sed -i 's/"maximum_distance": 100000,/"maximum_distance": 50000000,/g' ors-config.json
+sudo sed -i 's/"maximum_distance_dynamic_weights": 100000,/"maximum_distance": 50000000,/g' ors-config.json
+sudo sed -i 's/"maximum_distance_avoid_areas": 100000,/"maximum_distance": 50000000,/g' ors-config.json
+sudo sed -i 's/"maximum_distance_alternative_routes": 100000,/"maximum_distance": 50000000,/g' ors-config.json
+sudo sed -i 's/"maximum_distance_round_trip_routes": 100000,/"maximum_distance": 50000000,/g' ors-config.json
+cd $CWD
+docker compose down
+docker compose up -d --build
+
 cd ors-map-client
 docker compose up -d
