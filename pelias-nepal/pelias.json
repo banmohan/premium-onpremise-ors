@@ -6,7 +6,9 @@
   "esclient": {
     "apiVersion": "7.5",
     "hosts": [
-      { "host": "elasticsearch" }
+      {
+        "host": "elasticsearch"
+      }
     ]
   },
   "elasticsearch": {
@@ -20,10 +22,18 @@
   },
   "api": {
     "services": {
-      "pip": { "url": "http://pip:4200" },
-      "libpostal": { "url": "http://libpostal:4400" },
-      "placeholder": { "url": "http://placeholder:4100" },
-      "interpolation": { "url": "http://interpolation:4300" }
+      "pip": {
+        "url": "http://pip:4200"
+      },
+      "libpostal": {
+        "url": "http://libpostal:4400"
+      },
+      "placeholder": {
+        "url": "http://placeholder:4100"
+      },
+      "interpolation": {
+        "url": "http://interpolation:4300"
+      }
     },
     "defaultParameters": {
       "focus.point.lat": 28.00,
@@ -33,15 +43,46 @@
     "targets": {
       "auto_discover": true,
       "layers_by_source": {
-        "openstreetmap": [ "venue", "address", "street" ],
-        "openaddresses": [ "address" ],
-        "geonames": [ "country", "region", "county", "localadmin", "locality", "neighbourhood", "venue"],
-        "whosonfirst": ["locality", "county", "localadmin", "region", "country", "neighbourhood"]
+        "openstreetmap": [
+          "venue",
+          "address",
+          "street"
+        ],
+        "openaddresses": [
+          "address"
+        ],
+        "geonames": [
+          "country",
+          "region",
+          "county",
+          "localadmin",
+          "locality",
+          "neighbourhood",
+          "venue"
+        ],
+        "whosonfirst": [
+          "locality",
+          "county",
+          "localadmin",
+          "region",
+          "country",
+          "neighbourhood"
+        ]
       },
       "layer_aliases": {
-        "coarse": ["venue", "address", "street", "locality", "county", "localadmin", "region", "country", "neighbourhood"]
+        "coarse": [
+          "venue",
+          "address",
+          "street",
+          "locality",
+          "county",
+          "localadmin",
+          "region",
+          "country",
+          "neighbourhood"
+        ]
       }
-    },
+    }
   },
   "imports": {
     "adminLookup": {
@@ -53,27 +94,37 @@
     },
     "openstreetmap": {
       "download": [
-        { "sourceURL": "http://download.geofabrik.de/asia/nepal-latest.osm.pbf" }
+        {
+          "sourceURL": "http://download.geofabrik.de/asia/nepal-latest.osm.pbf"
+        }
       ],
       "leveldbpath": "/tmp",
       "datapath": "/data/openstreetmap",
-      "import": [{
-        "filename": "nepal-latest.osm.pbf"
-      }]
+      "import": [
+        {
+          "filename": "nepal-latest.osm.pbf"
+        }
+      ]
     },
     "openaddresses": {
       "datapath": "/data/openaddresses",
-      "files": ["np/countrywide.csv"]
+      "files": [
+        "np/countrywide.csv"
+      ]
     },
     "polyline": {
       "datapath": "/data/polylines",
-      "files": [ "extract.0sv" ]
+      "files": [
+        "extract.0sv"
+      ]
     },
     "whosonfirst": {
       "datapath": "/data/whosonfirst",
       "importPostalcodes": true,
       "countryCode": "NP",
-      "importPlace": [ "85632465" ]
+      "importPlace": [
+        "85632465"
+      ]
     }
   }
 }
