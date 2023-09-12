@@ -54,9 +54,12 @@ sed -i "s|put-the-bitly-api-key-here|$BITLY_API_KEY|g" app-config.js
 sed -i "s|put-the-bitly-login-here|$BITLY_LOGIN|g" app-config.js
 sed -i "s|useORSMenu: true|useORSMenu: false|g" app-config.js
 sed -i "s|appName: 'Openrouteservice Maps'|appName: 'Premium Maps'|g" app-config.js
+sed -i "s|brandLogoSrc: '@/assets/img/heigit-and-hd-uni.png'|brandLogoSrc: ''|g" app-config.js
 sed -i "s|footerAppName: 'openrouteservice'|footerAppName: 'Premium'|g" app-config.js
 sed -i "s|footerDevelopedByLink: 'https://www.heigit.org/'|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|g" app-config.js
 sed -i "s|https://api.openrouteservice.org|http://ors.$SERVER_URL|g" default-map-settings.js
+sed -i "s|defaultProfile: 'cycling-regular'|defaultProfile: 'driving-car'|g" default-map-settings.js
+sed -i "s|mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany|mapCenter: {lat: 85.346035, lng: 27.684680}, // Default center is at Premium Technologies|g" default-map-settings.js
 cd $CWD/ors-map-client
 sed -i "s|8080:|9981:|g" docker-compose.yml
 cd $CWD
