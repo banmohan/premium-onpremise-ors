@@ -93,6 +93,7 @@ cd projects/nepal
 mkdir ./data
 sed -i '/DATA_DIR/d' .env
 echo 'DATA_DIR=./data' >> .env
+
 /usr/local/bin/pelias compose pull
 /usr/local/bin/pelias elastic start
 /usr/local/bin/pelias elastic wait
