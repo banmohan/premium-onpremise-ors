@@ -62,6 +62,8 @@ sed -i "s|defaultProfile: 'cycling-regular'|defaultProfile: 'driving-car'|g" def
 sed -i "s|mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany|mapCenter: {lat: 85.346035, lng: 27.684680}, // Default center is at Premium Technologies|g" default-map-settings.js
 cd $CWD/ors-map-client/src/support
 sed -i "s|addressesArgs.layers = ['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode']|addressesArgs.layers = ['coarse', 'venue', 'address', 'street', 'locality', 'county', 'localadmin', 'region', 'country', 'neighbourhood']|g" ors-api-runner.js
+cd $CWD/ors-map-client/src/fragments/map-view
+sed -i "s/return this.mapHeight > 450/return true || this.mapHeight > 450/g" map-view.js
 cd $CWD/ors-map-client
 sed -i "s|8080:|9981:|g" docker-compose.yml
 cd $CWD
