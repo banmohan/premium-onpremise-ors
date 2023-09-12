@@ -58,7 +58,7 @@ sed -i "s|footerAppName: 'openrouteservice'|footerAppName: 'Premium'|g" app-conf
 sed -i "s|footerDevelopedByLink: 'https://www.heigit.org/'|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|g" app-config.js
 sed -i "s|https://api.openrouteservice.org|http://ors.$SERVER_URL|g" default-map-settings.js
 sed -i "s|defaultProfile: 'cycling-regular'|defaultProfile: 'driving-car'|g" default-map-settings.js
-sed -i "s|mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany|mapCenter: {lat: 85.346035, lng: 27.684680}, // Default center is at Premium Technologies|g" default-map-settings.js
+sed -i "s|mapCenter: {lat: 49.510944, lng: 8.76709}, // Default center is at Heidelberg, Germany|mapCenter: {lat: 27.684680, lng: 85.346035}, // Default center is at Premium Technologies|g" default-map-settings.js
 cd $CWD/ors-map-client/src/support
 sed -i "s|addressesArgs.layers = \['country', 'region', 'macrocounty', 'macroregion', 'neighbourhood', 'borough', 'street', 'address', 'postalcode'\]|addressesArgs.layers = \['coarse', 'venue', 'address', 'street', 'locality', 'county', 'localadmin', 'region', 'country', 'neighbourhood'\]|g" ors-api-runner.js
 cd $CWD/ors-map-client/src/fragments/map-view
