@@ -54,7 +54,6 @@ sed -i "s|put-the-bitly-api-key-here|$BITLY_API_KEY|g" app-config.js
 sed -i "s|put-the-bitly-login-here|$BITLY_LOGIN|g" app-config.js
 sed -i "s|useORSMenu: true|useORSMenu: false|g" app-config.js
 sed -i "s|appName: 'Openrouteservice Maps'|appName: 'Premium Maps'|g" app-config.js
-sed -i "s|brandLogoSrc: '@/assets/img/heigit-and-hd-uni.png'|brandLogoSrc: ''|g" app-config.js
 sed -i "s|footerAppName: 'openrouteservice'|footerAppName: 'Premium'|g" app-config.js
 sed -i "s|footerDevelopedByLink: 'https://www.heigit.org/'|footerDevelopedByLink: 'https://www.premiumtech.com.np/'|g" app-config.js
 sed -i "s|https://api.openrouteservice.org|http://ors.$SERVER_URL|g" default-map-settings.js
