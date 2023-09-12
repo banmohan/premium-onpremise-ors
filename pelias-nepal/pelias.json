@@ -27,11 +27,21 @@
     },
     "defaultParameters": {
       "focus.point.lat": 28.00,
-      "focus.point.lon": 84.00
+      "focus.point.lon": 84.00,
+      "boundary.country": "NP"
     },
     "targets": {
-      "auto_discover": true
-    }
+      "auto_discover": true,
+      "layers_by_source": {
+        "openstreetmap": [ "venue", "address", "street" ],
+        "openaddresses": [ "address" ],
+        "geonames": [ "country", "region", "county", "localadmin", "locality", "neighbourhood", "venue"],
+        "whosonfirst": ["locality", "county", "localadmin", "region", "country", "neighbourhood"]
+      },
+      "layer_aliases": {
+        "coarse": ["venue", "address", "street", "locality", "county", "localadmin", "region", "country", "neighbourhood"]
+      }
+    },
   },
   "imports": {
     "adminLookup": {
